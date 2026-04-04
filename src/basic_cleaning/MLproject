@@ -1,0 +1,43 @@
+name: basic_cleaning
+conda_env: conda.yml
+
+entry_points:
+  main:
+    parameters:
+
+      # parameters [parameter1:
+      #   description: ## ADD DESCRIPTION
+      #   type: string
+
+      input_artifact:
+        description: Valid artifact name with csv file
+        type: string
+
+      output_artifact:
+        description: Name of output cleaned data
+        type: string
+
+      output_type:
+        description: Cleaned csv file
+        type: string
+
+      output_description:
+        description: Cleaned version of the iput artifact
+        type: string
+
+      min_price:
+        description: Minimum price
+        type: string
+
+      max_price:
+        description: Maximum price
+        type: string
+
+
+    command: >-
+        python run.py --input_artifact {input_artifact}\
+                      --output_artifact {output_artifact}\
+                      --output_type {output_type}\
+                      --output_description {output_description}\
+                      --min_price {min_price}\
+                      --max_price {max_price} 
