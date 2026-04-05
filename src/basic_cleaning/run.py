@@ -23,6 +23,10 @@ def go(args):
     logger.info("Remove price outliers.")
     df = df[df["price"].between(args.min_price, args.max_price)]
     df.to_csv("clean_sample.csv", index=False)
+    
+    logger.info("update for sample2.csv...")
+    idx = df['longitude'].between(-74.25, -73.50) & df['latitude'].between(40.5, 41.2)
+    df = df[idx].copy()
 
     logger.info("Create output artifact.")
     artifact = wandb.Artifact(
