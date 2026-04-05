@@ -13,7 +13,7 @@ logger = logging.getLogger()
 
 
 def go(args):
-
+    """Function accepting cli args for data split."""
     run = wandb.init(entity="rental_price",
                     name = "train&test split", job_type="split_data")
 
