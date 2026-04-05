@@ -36,6 +36,8 @@ Download  → Simple Cleaning → Validation → Train / Val / Test Split → Mo
 - ✅ Implemented **Random Forest pipeline** on sklearn
 - ✅ Performed manual **hyperparameter tuning via Hydra sweap and w&b**
 - ✅ Ensured that pipeline runs smoothly for **continuous retraining and reproducibility**
+- ✅ Enforcing some pep8 coding style
+
 
 ---
 
