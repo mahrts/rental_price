@@ -57,8 +57,8 @@ Running the code requires w&b login.
 wandb login --relogin [YOUR_WANDB_API_KEY]
 ```
 ### Example for retraining
-Assume an new data artifact [NEW_TRAINING_DATA.csv] arrived on w&b, then the model can be retrained with:
+Assume an new data artifact [NEW_TRAINING_DATA.csv] arrived on w&b, then the model with version [my_version] (e.g. 1.0.3) can be retrained with:
 
 ```bash
-mlflow run https://github.com/mahrts/rental_price.git -v 1.0.2 -P hydra_options="etl.sample='[NEW_TRAINING_DATA.csv]'"
+mlflow run https://github.com/mahrts/rental_price.git -v [my_version] -P hydra_options="etl.sample='[NEW_TRAINING_DATA.csv]'"
 ```
