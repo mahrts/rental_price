@@ -81,6 +81,9 @@ celerybeat-schedule
 # SageMath parsed files
 *.sage.py
 
+#useless files:
+rf_config.json
+
 # Environments
 .env
 .venv

@@ -9,7 +9,8 @@ _steps = [
     "basic_cleaning",
     "data_check",
     "data_split",
-    "train_random_forest"]
+    "train_random_forest",
+    "test_regression_model"]
 
 
 
@@ -61,7 +62,7 @@ def go(config: DictConfig):
             env_manager="conda",
             parameters={
                 "csv": "clean_sample.csv:latest",
-                "ref":"clean_sample.csv:reference",
+                "ref": "clean_sample.csv:reference",
                 "kl_threshold": config["data_check"]["kl_threshold"],
                 "min_price": config["etl"]["min_price"],
                 "max_price": config["etl"]["max_price"],
@@ -94,7 +95,7 @@ def go(config: DictConfig):
             entry_point = "main",
             env_manager = "conda",
             parameters = {
-                "trainval_artifact": "clean_sample.csv:latest",
+                "trainval_artifact": "data_train.csv:latest",
                 "val_size": config["modeling"]["val_size"],
                 "random_seed": config["modeling"]["random_seed"],
                 "stratify_by": config["modeling"]["stratify_by"],

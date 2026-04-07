@@ -1,4 +1,4 @@
-"""This script trains a Random Forest."""
+"""This script preprocessed data and trains a Random Forest."""
 
 import argparse
 import logging
@@ -51,7 +51,7 @@ def go(args):
 
     trainval_local_path = run.use_artifact(args.trainval_artifact).file()
 
-    X = pd.read_csv(trainval_local_path)
+    X = pd.read_csv(trainval_local_path, low_memory=False)
     y = X.pop("price")
 
     logger.info(f"Minimum price: {y.min()}, Maximum price: {y.max()}")
@@ -98,13 +98,13 @@ def go(args):
     artifact.add_dir("random_forest_dir")
     run.log_artifact(artifact)
 
-    # Plot feature importance
+    logger.info("Plot feature importance")
     fig_feat_imp = plot_feature_importance(sk_pipe, processed_features)
 
     run.summary['r2'] = r_squared
     run.summary["mae"] = mae
 
-    # Upload to W&B the feture importance visualization
+    logger.info("Upload to W&B the feture importance visualization")
     run.log(
         {
             "feature_importance": wandb.Image(fig_feat_imp),
@@ -168,8 +168,6 @@ def get_inference_pipeline(rf_config, max_tfidf_features):
     )
 
     # Some minimal NLP for the "name" column
-    #reshape_to_1d = FunctionTransformer(np.reshape, kw_args={"newshape":-1})
-    #reshape_to_1d = FunctionTransformer(np.reshape, kw_args={"newshape": -1})
     reshape_to_1d = FunctionTransformer(lambda x: np.reshape(x, -1))
     name_tfidf = make_pipeline(
         SimpleImputer(strategy="constant", fill_value=""),

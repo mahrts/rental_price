@@ -43,8 +43,8 @@ def go(args):
 
             logger.info(f"Uploading the {split} dataset to {artifact_name}")
 
-            df.to_csv(temp_path)
-            
+            df.to_csv(temp_path, index=False)
+
             logger.info(f"Creating {split} artifact data")
             artifact = wandb.Artifact(
                 name=artifact_name,
